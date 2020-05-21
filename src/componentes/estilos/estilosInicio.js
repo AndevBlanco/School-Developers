@@ -1,3 +1,4 @@
+
 const estilosInicio = {
     banner: {
         backgroundImage:"url('https://github.com/JairPrada/Construccion/blob/master/views/public/imagenes/fondo1.jpg?raw=true')",

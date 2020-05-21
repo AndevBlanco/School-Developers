@@ -51,17 +51,23 @@ class Login extends Component {
     }
     render() {
         return (
-            <Container maxWidth="xs">
-                <div style={styleForm.paper}>
-                    <Avatar style={styleForm.Avatar}>
-                        <Icono></Icono>
-                    </Avatar>
-                    <Typography component="h1" variant="h5">Ingresa tus datos</Typography>
-                    <form style={styleForm.formulario}>
-                        <TextField variant="outlined" fullWidth label="Correo" value={this.state.usuario.correo} onChange={this.cambiarState} name="correo" margin="normal" />
-                        <TextField variant="outlined" fullWidth label="Contraseña" value={this.state.usuario.contraseña} onChange={this.cambiarState} margin="normal" type="password" name="contraseña" />
-                        <Button fullWidth variant="contained" onClick={this.Continuar} color="primary" type="submit">Iniciar</Button>
-                    </form>
+            <Container maxWidth="md" >
+                <div >
+                    <br></br>
+                    <div style={styleForm.paperLog}>
+                        <Avatar style={styleForm.Avatar}>
+                            <Icono></Icono>
+                        </Avatar>
+                        <Typography component="h1" variant="h5">Iniciar Sesion</Typography>
+                        <form style={styleForm.formulario}>
+                            <TextField variant="outlined" fullWidth label="Correo" value={this.state.usuario.correo} onChange={this.cambiarState} name="correo" margin="normal" />
+                            <TextField variant="outlined" fullWidth label="Contraseña" value={this.state.usuario.contraseña} onChange={this.cambiarState} margin="normal" type="password" name="contraseña" />
+                            <Button fullWidth variant="contained" style={styleForm.submit} onClick={this.Continuar} color="primary" type="submit">Iniciar</Button>
+                        </form>
+                    </div>
+                    <br></br>
+                    <br></br>
+                    <br></br>
                 </div>
             </Container>
         );

@@ -11,6 +11,9 @@ import Login from './componentes/seguridad/Login';
 import { FirebaseContext } from "./server";
 import { useStateValue } from "./sesion/store";
 import { Snackbar } from '@material-ui/core';
+import Tablero from './componentes/vistas/Tablero';
+import RegistrarProfesor from './componentes/seguridad/RegistrarProfesor';
+import RutaAutenticada from './componentes/seguridad/RutaAutenticada';
 
 function App(props) {
   let Firebase = React.useContext(FirebaseContext);
@@ -56,8 +59,11 @@ function App(props) {
             <br></br>
             <Switch>
               <Route path="/" exact component={Inicio} />
-              <Route path="/ListaProblemas" component={ListaProblemas} />
+              <Route path="/ListaProblemas" component={ListaProblemas}/>
+              <RutaAutenticada exact path="/ListaProblemas" autenticadoFirebase={Firebase.auth.currentUser} component={ListaProblemas}/>
+              <Route path="/Tablero"  component={Tablero} />
               <Route path="/Registrarse" component={RegistrarEstudiante} />
+              <Route path="/RegistrarseProfesor" component={RegistrarProfesor} />
               <Route path="/IniciarSesion" component={Login} />
             </Switch>
           </MuiThemeProvider>

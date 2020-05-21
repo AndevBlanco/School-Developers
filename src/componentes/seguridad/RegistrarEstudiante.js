@@ -66,16 +66,16 @@ class RegistrarEstudiante extends Component {
                     <form style={styleForm.formulario}>
                         <Grid container spacing={2} >
                             <Grid item md={12} xs={12}>
-                                <TextField name="nombre" onChange={this.guardarEstado} value={this.state.usuario.nombre} fullWidth label="Ingrese su nombre" />
+                                <TextField variant="outlined" margin="normal" name="nombre" onChange={this.guardarEstado} value={this.state.usuario.nombre} fullWidth label="Ingrese su nombre" />
                             </Grid>
                             <Grid item md={12} xs={12}>
-                                <TextField name="apellido" onChange={this.guardarEstado} value={this.state.usuario.apellido} fullWidth label="Ingrese su apellido" />
+                                <TextField variant="outlined" margin="normal" name="apellido" onChange={this.guardarEstado} value={this.state.usuario.apellido} fullWidth label="Ingrese su apellido" />
                             </Grid>
                             <Grid item md={12} xs={12}>
-                                <TextField name="correo" onChange={this.guardarEstado} value={this.state.usuario.correo} fullWidth label="Ingrese su correo" />
+                                <TextField variant="outlined" margin="normal" name="correo" onChange={this.guardarEstado} value={this.state.usuario.correo} fullWidth label="Ingrese su correo" />
                             </Grid>
                             <Grid item md={12} xs={12}>
-                                <TextField name="contraseña" onChange={this.guardarEstado} value={this.state.usuario.contraseña} type="password" fullWidth label="Ingrese su contraseña" />
+                                <TextField variant="outlined" margin="normal" name="contraseña" onChange={this.guardarEstado} value={this.state.usuario.contraseña} type="password" fullWidth label="Ingrese su contraseña" />
                             </Grid>
                         </Grid>
                         <Grid container justify="center">
