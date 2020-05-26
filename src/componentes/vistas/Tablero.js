@@ -20,7 +20,7 @@ function Tablero() {
     }
     return (
         <div style={styleForm.paperTab}>
-            <div style={styleForm.formulario}>
+            <div style={styleForm.formU}>
                 <Grid container spacing={2}>
                     <Grid item md={1} xs={1}>
                         <Button onClick={guardar} variant="contained" color="primary">Guardar</Button>

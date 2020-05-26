@@ -14,24 +14,28 @@ import { Snackbar } from '@material-ui/core';
 import Tablero from './componentes/vistas/Tablero';
 import RegistrarProfesor from './componentes/seguridad/RegistrarProfesor';
 import RutaAutenticada from './componentes/seguridad/RutaAutenticada';
+import PerfilUsuario from './componentes/seguridad/PerfilUsuario';
+import NuevoProblema from './componentes/vistas/NuevoProblema';
+import EditarProblema from './componentes/vistas/editarProblema';
+import LoginTelefono from './componentes/seguridad/LoginTelefono';
 
 function App(props) {
   let Firebase = React.useContext(FirebaseContext);
   const [autenticacionIniciada, setupFirebaseInitial] = React.useState(false);         //creando una variable de tipo estado autenticacionIniciada con valor false
 
-  const [{openSnackbar}, dispatch] = useStateValue();// llamandoo reducer de opensnackbar
+  const [{ openSnackbar }, dispatch] = useStateValue();// llamandoo reducer de opensnackbar
 
   useEffect(() => {
     Firebase.estaIniciado().then(val => {
       setupFirebaseInitial(val);
     });
   });
- 
+
   return autenticacionIniciada !== false ? (
     <Fragment>
       <Snackbar
         anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
-        open={openSnackbar ? openSnackbar.open :false}
+        open={openSnackbar ? openSnackbar.open : false}
         autoHideDuration={3000}
         ContentProps={{
           "aria-describedby": "message-id"
@@ -44,10 +48,10 @@ function App(props) {
         onClose={() =>
           dispatch({
             type: "OPEN_SNACKBAR",
-            openMensaje:{
-              open:false,
-              mensaje:""
-            } 
+            openMensaje: {
+              open: false,
+              mensaje: ""
+            }
           })
         }
       >
@@ -58,13 +62,16 @@ function App(props) {
             <ButtonAppBar />
             <br></br>
             <Switch>
-              <Route path="/" exact component={Inicio} />
-              <Route path="/ListaProblemas" component={ListaProblemas}/>
-              <RutaAutenticada exact path="/ListaProblemas" autenticadoFirebase={Firebase.auth.currentUser} component={ListaProblemas}/>
-              <Route path="/Tablero"  component={Tablero} />
+              <Route path="/" exact component={Login}/>
+              <Route path="/Telefono" exact component={LoginTelefono} />
+              <Route path="/Inicio" exact component={Inicio} />
+              <Route path="/Tablero" component={Tablero} />
               <Route path="/Registrarse" component={RegistrarEstudiante} />
               <Route path="/RegistrarseProfesor" component={RegistrarProfesor} />
-              <Route path="/IniciarSesion" component={Login} />
+              <RutaAutenticada exact path="/ListaProblemas" autenticadoFirebase={Firebase.auth.currentUser} component={ListaProblemas} />
+              <RutaAutenticada exact path="/Perfil" autenticadoFirebase={Firebase.auth.currentUser} component={PerfilUsuario} />
+              <RutaAutenticada exact path="/Problema" autenticadoFirebase={Firebase.auth.currentUser} component={NuevoProblema} />
+              <RutaAutenticada exact path="/Problema/:id" autenticadoFirebase={Firebase.auth.currentUser} component={EditarProblema} />
             </Switch>
           </MuiThemeProvider>
         </Fragment>

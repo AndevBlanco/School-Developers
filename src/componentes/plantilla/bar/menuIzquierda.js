@@ -5,20 +5,20 @@ import { Link } from "react-router-dom"
 export const MenuIzquierda = ({ classes }) => (
     <div className={classes.list}>
         <List>
-            <ListItem component={Link} button to="/" >
+            <ListItem component={Link} button to="/Inicio" >
                 <i className="material-icons">business</i>
                 <ListItemText classes={{ primary: classes.ListItemText }} primary="Inicio"></ListItemText>
             </ListItem>
         </List>
         <List>
-            <ListItem component={Link} button to="">
+            <ListItem component={Link} button to="/Perfil">
                 <i className="material-icons">account_box</i>
                 <ListItemText classes={{ primary: classes.ListItemText }} primary="Perfil"></ListItemText>
             </ListItem>
         </List>
         <Divider />
         <List>
-            <ListItem component={Link} button to="" >
+            <ListItem component={Link} button to="/Problema" >
                 <i className="material-icons">add_box</i>
                 <ListItemText classes={{ primary: classes.ListItemText }} primary="Subir Problema"></ListItemText>
             </ListItem>

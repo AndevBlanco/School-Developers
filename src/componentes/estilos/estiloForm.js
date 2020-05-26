@@ -1,15 +1,5 @@
 const styleForm = {
-    paper: {
-        padding: 40,
-        marginTop: 20,
-        marginBottom:100,
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-        width: "60%",
-        marginLeft:"15%",
-        border:"1px solid black"
-    },
+
     paperTab: {
         padding: 40,
         marginTop: 20,
@@ -20,27 +10,49 @@ const styleForm = {
     },
     paperLog: {
         padding: 40,
-        marginTop: 50,
+        marginTop: 20,
         marginBottom:100,
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
-        width: "60%",
-        marginLeft:"15%",
-        border:"1px solid black"
+        backgroundColor: "#f5f5f5"
     },
     Avatar: {
         matrgin: 8,
         backgroundColor: "#f50057"
     },
-    formulario: {
-        width: "80%",
-        padding: 10,
-        marginTop: 10,
-        marginBottom:10
+    paperU: {
+        padding: 40,
+        marginTop: 20,
+        marginBottom:100,
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        backgroundColor: "#f5f5f5"
     },
-    submit: {
-        marginTop: 19,
+    formU: {
+        width: "60%",
+        marginTop: 20,
+        marginBottom:20
+    },
+    formUT: {
+        width: "100%",
+        marginTop: 20,
+        marginBottom:20
+    },
+    submitUI: {
+        marginTop: 15,
+        marginBottom: 20,
+        width: "60%"
+
+    },
+    submitU: {
+        marginTop: 15,
+        marginBottom: 20,
+    },
+    captcha:{
+        flexGrow:1,
+        marginBottom:10
     }
 }
 export default styleForm

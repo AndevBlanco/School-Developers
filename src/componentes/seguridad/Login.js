@@ -1,15 +1,15 @@
 import React, { Component } from 'react';
-import { Container, Avatar, Typography, TextField, Button } from '@material-ui/core';
+import { Container, Avatar, Typography, TextField, Button, Link, Grid } from '@material-ui/core';
 import styleForm from '../estilos/estiloForm';
 import Icono from "@material-ui/icons/LockOutlined";
 import { compose } from 'recompose';
 import { consumerFirebase } from '../../server';
-import {iniciarSesion} from "../../sesion/actions/sesionAction";
-import {StateContext} from "../../sesion/store";
-import {openMensajePantalla} from '../../sesion/actions/snackbarAction';
+import { iniciarSesion } from "../../sesion/actions/sesionAction";
+import { StateContext } from "../../sesion/store";
+import { openMensajePantalla } from '../../sesion/actions/snackbarAction';
 
 class Login extends Component {
-    static contextType=StateContext;
+    static contextType = StateContext;
     state = {
         Firebase: null,
         usuario: {
@@ -34,20 +34,37 @@ class Login extends Component {
     }
     Continuar = async e => {
         e.preventDefault();
-        const [{sesion},dispatch]=this.context;
-        const {Firebase, usuario}=this.state;
-        const {correo,contraseña}=usuario;
-        let callback = await iniciarSesion(dispatch,Firebase,correo,contraseña);
-        if(callback.status){
-            this.props.history.push("/")
-        }else{
+        const [{ sesion }, dispatch] = this.context;
+        const { Firebase, usuario } = this.state;
+        const { correo, contraseña } = usuario;
+        let callback = await iniciarSesion(dispatch, Firebase, correo, contraseña);
+        if (callback.status) {
+            this.props.history.push("/Inicio")
+        } else {
             console.log(callback.mensaje.message)
-            openMensajePantalla(dispatch,{
-                open:true,
-                mensaje:callback.mensaje.message
+            openMensajePantalla(dispatch, {
+                open: true,
+                mensaje: callback.mensaje.message
             })
         }
-        
+
+    }
+    reseteraContraseña=()=>{
+        const {Firebase,usuario}=this.state;
+        const[{sesion},dispatch]=this.context;
+        Firebase.auth.sendPasswordResetEmail(usuario.correo)
+        .then(success=>{
+            openMensajePantalla(dispatch,{
+                open:true,
+                mensaje:"se envio un correo electronico a tu cuenta para reestablecer tu contraseña"
+            })
+        })
+        .catch(error=>{
+            openMensajePantalla(dispatch,{
+                open:true,
+                mensaje:error.message
+            })
+        })
     }
     render() {
         return (
@@ -58,16 +75,30 @@ class Login extends Component {
                         <Avatar style={styleForm.Avatar}>
                             <Icono></Icono>
                         </Avatar>
+                        <br></br>
                         <Typography component="h1" variant="h5">Iniciar Sesion</Typography>
-                        <form style={styleForm.formulario}>
+                        <form style={styleForm.formU}>
                             <TextField variant="outlined" fullWidth label="Correo" value={this.state.usuario.correo} onChange={this.cambiarState} name="correo" margin="normal" />
                             <TextField variant="outlined" fullWidth label="Contraseña" value={this.state.usuario.contraseña} onChange={this.cambiarState} margin="normal" type="password" name="contraseña" />
-                            <Button fullWidth variant="contained" style={styleForm.submit} onClick={this.Continuar} color="primary" type="submit">Iniciar</Button>
+                            <Button fullWidth variant="contained" style={styleForm.submitU} onClick={this.Continuar} color="primary" type="submit">Iniciar</Button>
+                            <Grid container>
+                                <Grid item xs>
+                                    <Link href="#" variant="body2" onClick={this.reseteraContraseña}>
+                                        {"Olvidaste tu contraseña"}
+                                    </Link>
+                                </Grid>
+                                <Grid item >
+                                    <Link href="/Registrarse" variant="body2">
+                                        {"No tienes cuenta? registrate"}
+                                    </Link>
+                                </Grid>
+                            </Grid>
                         </form>
+                        <Button variant="contained" color="primary" fullWidth style={styleForm.submitUI} href="/Telefono">
+                            Ingresar con telefono
+                        </Button>
                     </div>
-                    <br></br>
-                    <br></br>
-                    <br></br>
+
                 </div>
             </Container>
         );

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Container, Avatar, Typography, Grid, TextField, Button } from '@material-ui/core';
+import { Container, Avatar, Typography, Grid, TextField, Button, Link } from '@material-ui/core';
 import styleForm from '../estilos/estiloForm';
 import IconoFormulario from "@material-ui/icons/SupervisedUserCircle"
 import { compose } from "recompose";
@@ -40,7 +40,7 @@ class RegistrarProfesor extends Component {
         const {Firebase,usuario}=this.state;
         let callback= await crearUsuario(dispatch,Firebase,usuario)
         if(callback.status){
-            this.props.history.push("/IniciarSesion");
+            this.props.history.push("/Inicio");
         }else{
             openMensajePantalla(dispatch,{
                 open:true,
@@ -51,13 +51,13 @@ class RegistrarProfesor extends Component {
     render() {
         return (
             <Container maxWidth="md">
-                <div style={styleForm.paper}>
+                <div style={styleForm.paperU}>
                     <Avatar style={styleForm.Avatar}>
                         <IconoFormulario />
                     </Avatar>
                     <br></br>
-                    <Typography component="h1" variant="h5" >Crea una cuenta Profesor</Typography>
-                    <form style={styleForm.formulario}>
+                    <Typography component="h1" variant="h5" >Crea cuenta Profesor</Typography>
+                    <form style={styleForm.formU}>
                         <Grid container spacing={2} >
                             <Grid item md={12} xs={12}>
                                 <TextField variant="outlined" margin="normal" name="nombre" onChange={this.guardarEstado} value={this.state.usuario.nombre} fullWidth label="Ingrese su nombre" />
@@ -74,15 +74,23 @@ class RegistrarProfesor extends Component {
                         </Grid>
                         <Grid container justify="center">
                             <Grid item xs={12} md={12}>
-                                <Button onClick={this.registrarEstudiante} type="submit" variant="contained" fullWidth size="large" color="primary" style={styleForm.submit}>Registrarse</Button>
+                                <Button onClick={this.registrarProfesor} type="submit" variant="contained" fullWidth size="large" color="primary" style={styleForm.submitU}>Registrarse</Button>
+                            </Grid>
+                        </Grid>
+                        <Grid container >
+                            <Grid item xs >
+                                <Link href="/" variant="body2">
+                                    {"Ya tengo una cuenta"}
+                                </Link>
+                            </Grid>
+                            <Grid item >
+                                <Link href="/Registrarse" variant="body2">
+                                    {"Registrate como estudiante"}
+                                </Link>
                             </Grid>
                         </Grid>
                     </form>
                 </div>
-                <br></br>
-                <br></br>
-                <br></br>
-                <br></br>
             </Container>
         );
     }

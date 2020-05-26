@@ -10,7 +10,7 @@ export default function Inicio() {
     <React.Fragment>
       <CssBaseline />
       <Container >
-        <Typography component="div" style={estilosInicio.banner} />
+        <Typography component="div" style={estilosInicio.sectionDesktop} />
       </Container>
     </React.Fragment>
   );

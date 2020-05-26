@@ -7,7 +7,7 @@ import { compose } from "recompose";
 import { StateContext } from "../../../sesion/store";
 import { cerrarSesion } from "../../../sesion/actions/sesionAction";
 import { MenuDerecha } from "./menuDerecha";
-import {Link} from "react-router-dom";
+import { Link } from "react-router-dom";
 import Foto from "../../../logo.svg";
 import { withRouter } from 'react-router-dom';
 import { MenuIzquierda } from './menuIzquierda';
@@ -24,7 +24,7 @@ class BarSesion extends Component {
         const [{ sesion }, dispatch] = this.context;
 
         cerrarSesion(dispatch, Firebase).then(success => {
-            this.props.history.push("/IniciarSesion");
+            this.props.history.push("/");
         })
     }
     toggleDrawer = (side, open) => () => {
@@ -46,7 +46,11 @@ class BarSesion extends Component {
         const { classes } = this.props;
         const [{ sesion }, dispatch] = this.context;
         const { usuario } = sesion;
-        const textoUsuario = usuario.nombre + " " + usuario.apellido;
+        let textoUsuario = usuario.nombre + " " + usuario.apellido;
+        if (!usuario.nombre) {
+            textoUsuario = usuario.telefono;
+        }
+
 
         return (
             <Fragment>
@@ -73,14 +77,14 @@ class BarSesion extends Component {
                         onClick={this.toggleDrawer("right", false)}
                         onKeyDown={this.toggleDrawer("right", false)}
                     >
-                        <MenuDerecha classes={classes} usuario={usuario} textoUsuario={textoUsuario} fotoUsuario={Foto} salirSesion={this.cerrarSesionApp}></MenuDerecha>
+                        <MenuDerecha classes={classes} usuario={usuario} textoUsuario={textoUsuario} fotoUsuario={usuario.foto || Foto} salirSesion={this.cerrarSesionApp}></MenuDerecha>
                     </div>
                 </Drawer>
                 <Toolbar>
                     <IconButton color="inherit" onClick={this.toggleDrawer("left", true)}>
                         <i className="material-icons" >menu</i>
                     </IconButton>
-                    <Typography variant="h5"> SchoolDevelopers</Typography>
+                    <Typography variant="h5"> SCHOOLDEVELOPERS</Typography>
                     <div className={classes.grow}></div>
                     <div className={classes.sectionDesktop}>
                         <IconButton color="inherit" component={Link} to="">
@@ -90,7 +94,7 @@ class BarSesion extends Component {
                             Salir
                         </Button>
                         <Button color="inherit">{textoUsuario}</Button>
-                        <Avatar src={Foto}></Avatar>
+                        <Avatar src={usuario.foto || Foto}></Avatar>
                     </div>
                     <div className={classes.sectionMovil}>
                         <IconButton color="inherit" onClick={this.toggleDrawer("right", true)}>
