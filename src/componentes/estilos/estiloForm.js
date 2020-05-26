@@ -35,6 +35,11 @@ const styleForm = {
         marginTop: 20,
         marginBottom:20
     },
+    formTab: {
+        width: "100%",
+        marginTop: 20,
+        marginBottom:20
+    },
     formUT: {
         width: "100%",
         marginTop: 20,

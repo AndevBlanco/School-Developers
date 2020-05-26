@@ -20,27 +20,27 @@ function Tablero() {
     }
     return (
         <div style={styleForm.paperTab}>
-            <div style={styleForm.formU}>
-                <Grid container spacing={2}>
-                    <Grid item md={1} xs={1}>
+            <div style={styleForm.formTab}>
+                <Grid container spacing={5}  >
+                    <Grid item md={0} xs={2}>
                         <Button onClick={guardar} variant="contained" color="primary">Guardar</Button>
                     </Grid >
-                    <Grid item md={1} xs={1}>
+                    <Grid item md={0} xs={2}>
                         <Button onClick={borrar} variant="contained" color="primary" >Borrar</Button>
                     </Grid>
 
-                    <Grid item md={1} xs={1}>
+                    <Grid item md={0} xs={2}>
                         <Button onClick={volver} variant="contained" color="primary" >Volver</Button>
                     </Grid>
-                    <Grid item md={1} xs={1}>
+                    <Grid item md={0} xs={2}>
                         <Button onClick={volver} variant="contained" color="primary" >Subir</Button>
                     </Grid>
                 </Grid>
                 <Grid container spacing={2}>
-                    <Grid item md={6} xs={6}>
+                    <Grid item md={6} xs={12}>
                         <CanvasDraw brushColor="#130f40" canvasHeight={"500px"} canvasWidth={"100%"} brushRadius={1} ref={primerDibujo} style={{ border: "2px solid black" }} />
                     </Grid>
-                    <Grid item md={6} xs={6}>
+                    <Grid item md={6} xs={12}>
                         <CanvasDraw ref={segundoDibujo} hideGrid="true" disabled="true" canvasHeight={"500px"} canvasWidth={"100%"} brushColor="#130f40" brushRadius={1} style={{ border: "2px solid black" }} />
                     </Grid>
                 </Grid>
