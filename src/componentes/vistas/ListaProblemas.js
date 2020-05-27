@@ -46,7 +46,7 @@ class ListaProblemas extends Component {
         problemas: [],
         textoBusqueda: "",
         paginas: [],
-        paginaSize: 1,
+        paginaSize: 6,
         problemaInicial: null,
         paginaActual: 0
     }

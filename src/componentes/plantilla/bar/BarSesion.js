@@ -84,7 +84,7 @@ class BarSesion extends Component {
                     <IconButton color="inherit" onClick={this.toggleDrawer("left", true)}>
                         <i className="material-icons" >menu</i>
                     </IconButton>
-                    <Typography variant="h5"> SCHOOLDEVELOPERS</Typography>
+                    <Typography variant="h5">SchoolDevelopers</Typography>
                     <div className={classes.grow}></div>
                     <div className={classes.sectionDesktop}>
                         <IconButton color="inherit" component={Link} to="">

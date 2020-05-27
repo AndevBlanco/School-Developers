@@ -63,15 +63,15 @@ function App(props) {
             <br></br>
             <Switch>
               <Route path="/" exact component={Login}/>
-              <Route path="/Telefono" exact component={LoginTelefono} />
-              <Route path="/Inicio" exact component={Inicio} />
+              <Route path="/Telefono"  component={LoginTelefono} />
+              <Route path="/Inicio"  component={Inicio} />
               <Route path="/Tablero" component={Tablero} />
               <Route path="/Registrarse" component={RegistrarEstudiante} />
               <Route path="/RegistrarseProfesor" component={RegistrarProfesor} />
-              <RutaAutenticada exact path="/ListaProblemas" autenticadoFirebase={Firebase.auth.currentUser} component={ListaProblemas} />
-              <RutaAutenticada exact path="/Perfil" autenticadoFirebase={Firebase.auth.currentUser} component={PerfilUsuario} />
-              <RutaAutenticada exact path="/Problema" autenticadoFirebase={Firebase.auth.currentUser} component={NuevoProblema} />
-              <RutaAutenticada exact path="/Problema/:id" autenticadoFirebase={Firebase.auth.currentUser} component={EditarProblema} />
+              <RutaAutenticada  path="/ListaProblemas" autenticadoFirebase={Firebase.auth.currentUser} component={ListaProblemas} />
+              <RutaAutenticada  path="/Perfil" autenticadoFirebase={Firebase.auth.currentUser} component={PerfilUsuario} />
+              <RutaAutenticada  path="/Problema" autenticadoFirebase={Firebase.auth.currentUser} component={NuevoProblema} />
+              <RutaAutenticada  path="/Problema/:id" autenticadoFirebase={Firebase.auth.currentUser} component={EditarProblema} />
             </Switch>
           </MuiThemeProvider>
         </Fragment>
