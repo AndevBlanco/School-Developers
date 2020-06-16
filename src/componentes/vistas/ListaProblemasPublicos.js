@@ -5,7 +5,7 @@ import fondo1 from "../../logo.svg";
 import { consumerFirebase } from "../../server";
 import ArrowLeft from "@material-ui/icons/ArrowLeft";
 import ArrowRight from "@material-ui/icons/ArrowRight";
-import {obtenerDataP ,obtenerDataAnteriorP} from '../../sesion/actions/ProblemaAction';
+import { obtenerData ,obtenerDataAnterior} from '../../sesion/actions/ProblemaAction';
 import { Link } from 'react-router-dom';
 
 const style = {
@@ -19,7 +19,7 @@ const style = {
         minHeight: 650
     },
     link: {
-       display: "flex",
+        display: "flex",
         textDecoration:"none",
         color:"inherit"
     },
@@ -42,8 +42,7 @@ const style = {
         marginTop: "20px"
     }
 }
-
-class ListaProblemas extends Component {
+class ListaProblemasPublicos extends Component {
     state = {
         problemas: [],
         textoBusqueda: "",
@@ -93,7 +92,7 @@ class ListaProblemas extends Component {
     siguientePagina = () => {
         const { paginaActual, paginaSize, textoBusqueda, paginas } = this.state;
         const Firebase = this.props.Firebase;
-        obtenerDataP(Firebase, paginaSize, paginas[paginaActual].finalValor, textoBusqueda).then(firebaseReturnData => {
+        obtenerData(Firebase, paginaSize, paginas[paginaActual].finalValor, textoBusqueda).then(firebaseReturnData => {
             if (firebaseReturnData.arrayProblemas.length > 0) {
                 const pagina = {
                     inicialValor: firebaseReturnData.inicialValor,
@@ -113,7 +112,7 @@ class ListaProblemas extends Component {
         const Firebase = this.props.Firebase;
         
         if(paginaActual>0){ 
-            obtenerDataAnteriorP(Firebase,paginaSize,paginas[paginaActual-1].inicialValor,textoBusqueda).then(firebaseReturnData=>{
+            obtenerDataAnterior(Firebase,paginaSize,paginas[paginaActual-1].inicialValor,textoBusqueda).then(firebaseReturnData=>{
                 const pagina ={
                     inicialValor:firebaseReturnData.inicialValor,
                     finalValor:firebaseReturnData.finalValor,
@@ -132,7 +131,7 @@ class ListaProblemas extends Component {
 
         const Firebase = this.props.Firebase;
 
-        const firebaseReturnData = await obtenerDataAnteriorP(Firebase, paginaSize, problemaInicial, textoBusqueda);
+        const firebaseReturnData = await obtenerData(Firebase, paginaSize, problemaInicial, textoBusqueda);
 
         const pagina = {
             inicialValor: firebaseReturnData.inicialValor,
@@ -146,25 +145,11 @@ class ListaProblemas extends Component {
             paginActual: 0
         })
     }
-    eliminarProblema = id => {
-        this.props.Firebase.db
-            .collection("Problemas")
-            .doc(id)
-            .delete()
-            .then(success => {
-                this.eliminarProblemaLista(id);
-            })
+    solucionarProblema = id => {
+        this.props.history.push("/solucionar/editar/"+ id);
     }
-    eliminarProblemaLista = id => {
-        const problemaListaNueva = this.state.problemas.filter(
-            problema => problema.id !== id
-        );
-        this.setState({
-            problemas: problemaListaNueva
-        })
-    }
-    editarProblema = id => {
-        this.props.history.push("/editar/problema/"+ id);
+    verProblema = id => {
+        this.props.history.push("/Inicio/detalles/"+ id);
     }
     render() {
         return (
@@ -173,11 +158,11 @@ class ListaProblemas extends Component {
                     <Paper style={style.paper}>
                         <Grid item xs={12} sm={12}>
                             <Breadcrumbs aria-label="breadcrumbs">
-                                <Link color="inherit" style={style.link} to="/Inicio">
+                                <Link color="inherit"  style={style.link} to="/Inicio">
                                     <HomeIcon />
                                     Inicio
                                 </Link>
-                                <Typography color="textPrimary">Mis problemas</Typography>
+                                <Typography color="textPrimary">Problemas</Typography>
                             </Breadcrumbs>
                         </Grid>
                         <Grid item xs={12} sm={6} style={style.gridTextfield}>
@@ -219,18 +204,18 @@ class ListaProblemas extends Component {
                                             </CardContent>
                                             <CardActions>
                                                 <Button
-                                                    size="small"
+                                                    size="medium"
                                                     color="primary"
-                                                    onClick={() => this.editarProblema(card.id)}
+                                                    onClick={() => this.solucionarProblema(card.id)}
                                                 >
-                                                    Editar
+                                                    Solucionar
                                                 </Button>
                                                 <Button
-                                                    size="small"
+                                                    size="medium"
                                                     color="primary"
-                                                    onClick={() => this.eliminarProblema(card.id)}
+                                                    onClick={() => this.verProblema(card.id)}
                                                 >
-                                                    Eliminar
+                                                    ve Problema
                                                 </Button>
                                             </CardActions>
                                         </Card>
@@ -247,4 +232,4 @@ class ListaProblemas extends Component {
     }
 }
 
-export default consumerFirebase(ListaProblemas);
+export default consumerFirebase(ListaProblemasPublicos);

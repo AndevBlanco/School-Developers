@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { Container, Avatar, Typography, Grid, TextField, Button, Link } from '@material-ui/core';
+import { Container, Avatar, Typography, Grid, TextField, Button } from '@material-ui/core';
+
 import styleForm from '../estilos/estiloForm';
 import IconoFormulario from "@material-ui/icons/SupervisedUserCircle"
 import { compose } from "recompose";
@@ -7,6 +8,7 @@ import { consumerFirebase } from "../../server";
 import {crearUsuario} from "../../sesion/actions/sesionAction";
 import {openMensajePantalla} from "../../sesion/actions/snackbarAction";
 import {StateContext} from "../../sesion/store";
+import { Link } from 'react-router-dom';
 class RegistrarProfesor extends Component {
     static contextType=StateContext;
     state = {
@@ -79,12 +81,12 @@ class RegistrarProfesor extends Component {
                         </Grid>
                         <Grid container >
                             <Grid item xs >
-                                <Link href="/" variant="body2">
+                                <Link style={styleForm.link} to="/" variant="body2">
                                     {"Ya tengo una cuenta"}
                                 </Link>
                             </Grid>
                             <Grid item >
-                                <Link href="/Registrarse" variant="body2">
+                                <Link style={styleForm.link} to="/auth/estudiante" variant="body2">
                                     {"Registrate como estudiante"}
                                 </Link>
                             </Grid>

@@ -18,6 +18,9 @@ import PerfilUsuario from './componentes/seguridad/PerfilUsuario';
 import NuevoProblema from './componentes/vistas/NuevoProblema';
 import EditarProblema from './componentes/vistas/editarProblema';
 import LoginTelefono from './componentes/seguridad/LoginTelefono';
+import ListaProblemasPublicos from './componentes/vistas/ListaProblemasPublicos';
+import DetallesProblema from './componentes/vistas/DetallesProblema';
+
 
 function App(props) {
   let Firebase = React.useContext(FirebaseContext);
@@ -62,16 +65,19 @@ function App(props) {
             <ButtonAppBar />
             <br></br>
             <Switch>
-              <Route path="/" exact component={Login}/>
-              <Route path="/Telefono"  component={LoginTelefono} />
+              <Route path="/" exact component={Login} />
+              <Route path="/auth/telefono"  component={LoginTelefono} />
+              <Route path="/auth/profesor"  component={RegistrarProfesor} />
+              <Route path="/auth/estudiante" component={RegistrarEstudiante} />
+              <RutaAutenticada  path="/Inicio/detalles/:id" autenticadoFirebase={Firebase.auth.currentUser} component={DetallesProblema} />
+              <Route path="/Inicio/tablero"  component={Tablero} />
+              <RutaAutenticada  path="/Inicio/Listadeproblemas" autenticadoFirebase={Firebase.auth.currentUser} component={ListaProblemas} />
+              <RutaAutenticada  path="/solucionar/editar/:id" autenticadoFirebase={Firebase.auth.currentUser} component={Tablero} />
               <Route path="/Inicio"  component={Inicio} />
-              <Route path="/Tablero" component={Tablero} />
-              <Route path="/Registrarse" component={RegistrarEstudiante} />
-              <Route path="/RegistrarseProfesor" component={RegistrarProfesor} />
-              <RutaAutenticada  path="/ListaProblemas" autenticadoFirebase={Firebase.auth.currentUser} component={ListaProblemas} />
-              <RutaAutenticada  path="/Perfil" autenticadoFirebase={Firebase.auth.currentUser} component={PerfilUsuario} />
-              <RutaAutenticada  path="/Problema" autenticadoFirebase={Firebase.auth.currentUser} component={NuevoProblema} />
-              <RutaAutenticada  path="/Problema/:id" autenticadoFirebase={Firebase.auth.currentUser} component={EditarProblema} />
+              <RutaAutenticada  path="/editar/perfil" autenticadoFirebase={Firebase.auth.currentUser} component={PerfilUsuario} />
+              <RutaAutenticada  path="/editar/problema/:id" autenticadoFirebase={Firebase.auth.currentUser} component={EditarProblema} />
+              <RutaAutenticada  path="/problemas/publicos" autenticadoFirebase={Firebase.auth.currentUser} component={ListaProblemasPublicos} />
+              <RutaAutenticada  path="/problema" autenticadoFirebase={Firebase.auth.currentUser} component={NuevoProblema} />
             </Switch>
           </MuiThemeProvider>
         </Fragment>

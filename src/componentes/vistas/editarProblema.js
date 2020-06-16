@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import { consumerFirebase } from "../../server";
-import { Paper, Container, Grid, Breadcrumbs, Link, Typography, TextField, Button, Table, TableBody, TableRow, TableCell } from "@material-ui/core"
+import { Paper, Container, Grid, Breadcrumbs, Typography, TextField, Button, Table, TableBody, TableRow, TableCell } from "@material-ui/core"
 import HomeIcon from "@material-ui/icons/Home";
 import ImageUploader from "react-images-upload";
 import { v4 as uuidv4 } from 'uuid';
 import { crearKeyword } from '../../sesion/actions/Keyword';
+import { Link } from 'react-router-dom';
 
 const style = {
     container: {
@@ -44,7 +45,7 @@ class EditarProblema extends Component {
             ciudad: "",
             pais: "",
             descripcionEspecifica: "",
-            fotos: []
+            fotos: [],
         }
     }
     cambiarDato = e => {
@@ -80,7 +81,7 @@ class EditarProblema extends Component {
     eliminarArchivo = fotoUrl => async () => {
         const { problema } = this.state;
         const { id } = this.props.match.params;
-        let fotoID = fotoUrl.match(/[\w-]+.(jpg|png|jepg|gif|svg)/);
+        let fotoID = fotoUrl.match(/[\w-]+.(jpg|png|jepg|gif|jfif|svg)/);
         fotoID = fotoID[0];
         await this.props.Firebase.eliminarDocumento(fotoID);
 
@@ -98,7 +99,6 @@ class EditarProblema extends Component {
                     problema
                 })
             })
-
     }
     async componentDidMount() {
         const { id } = this.props.match.params;// capturando valor de id
@@ -108,29 +108,31 @@ class EditarProblema extends Component {
             problema: problemaDB.data()
         })
     }
-    guardarProblema=()=>{
-        const {id}=this.props.match.params;
-        const {problema} = this.state;
-        const textoBusqueda=problema.titulo+" "+problema.categoria+" "+problema.descripcionGeneral;
+    guardarProblema = () => {
+        const { id } = this.props.match.params;
+        const { problema } = this.state;
+        const textoBusqueda = problema.titulo + " " + problema.categoria + " " + problema.descripcionGeneral;
         const keywords = crearKeyword(textoBusqueda);
-        problema.keywords=keywords;
+        problema.keywords = keywords;
+        problema.propietario = this.props.Firebase.auth.currentUser.uid;
         this.props.Firebase.db
-        .collection("Problemas")
-        .doc(id)
-        .set(problema,{merge:true})
-        .then(success=>{
-            this.props.history.push("/ListaProblemas");
-        })
+            .collection("Problemas")
+            .doc(id)
+            .set(problema, { merge: true })
+            .then(success => {
+                this.props.history.push("/Inicio/Listadeproblemas");
+            })
     }
     render() {
         let uniqueID = uuidv4();
         return (
+           
             <Container style={style.container}>
                 <Paper style={style.paper}>
                     <Grid container spacing={3}>
                         <Grid item xs={12} md={8}>
                             <Breadcrumbs aria-label="breadcrumb">
-                                <Link color="inherit" style={style.link} href="/">
+                                <Link color="inherit" style={style.link} to="/Inicio">
                                     <HomeIcon style={style.homeIcon} />
                                 Inicio
                             </Link>
@@ -162,7 +164,7 @@ class EditarProblema extends Component {
                                     withIcon={true}
                                     buttonText="Selecione Archivos"
                                     onChange={this.subirArchivos}
-                                    imgExtension={[".jpg", ".gif", ".png", ".jpeg"]}
+                                    imgExtension={[".jpg", ".gif", ".png", ".jpeg","jfif"]}
                                     maxFileSize={5242880}
                                 />
                             </Grid>
@@ -188,7 +190,7 @@ class EditarProblema extends Component {
                         </Grid>
                         <Grid container justify="center">
                             <Grid item xs={12} md={6}>
-                                <Button type="button"onClick={this.guardarProblema} fullWidth variant="contained" size="large" color="primary" style={style.submit}>Guardar</Button>
+                                <Button type="button" onClick={this.guardarProblema} fullWidth variant="contained" size="large" color="primary" style={style.submit}>Guardar</Button>
                             </Grid>
                         </Grid>
                     </Grid>

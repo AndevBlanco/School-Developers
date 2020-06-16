@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Container, Avatar, Typography, TextField, Button, Link, Grid } from '@material-ui/core';
+import { Container, Avatar, Typography, TextField, Button, Grid } from '@material-ui/core';
 import styleForm from '../estilos/estiloForm';
 import Icono from "@material-ui/icons/LockOutlined";
 import { compose } from 'recompose';
@@ -7,6 +7,8 @@ import { consumerFirebase } from '../../server';
 import { iniciarSesion } from "../../sesion/actions/sesionAction";
 import { StateContext } from "../../sesion/store";
 import { openMensajePantalla } from '../../sesion/actions/snackbarAction';
+import { Link } from 'react-router-dom';
+import LoginTelefono from './LoginTelefono';
 
 class Login extends Component {
     static contextType = StateContext;
@@ -66,6 +68,9 @@ class Login extends Component {
             })
         })
     }
+    telefono=()=>{
+        this.props.history.push("/auth/telefono");
+    }
     render() {
         return (
             <Container maxWidth="md" >
@@ -83,18 +88,18 @@ class Login extends Component {
                             <Button fullWidth variant="contained" style={styleForm.submitU} onClick={this.Continuar} color="primary" type="submit">Iniciar</Button>
                             <Grid container>
                                 <Grid item xs>
-                                    <Link href="#" variant="body2" onClick={this.reseteraContraseña}>
+                                    <Link  style={styleForm.link} variant="body2" onClick={this.reseteraContraseña}>
                                         {"Olvidaste tu contraseña"}
                                     </Link>
                                 </Grid>
                                 <Grid item >
-                                    <Link href="/Registrarse" variant="body2">
+                                    <Link style={styleForm.link} variant="body2" to="/auth/estudiante" >
                                         {"No tienes cuenta? registrate"}
                                     </Link>
                                 </Grid>
                             </Grid>
                         </form>
-                        <Button variant="contained" color="primary" fullWidth style={styleForm.submitUI} href="/Telefono">
+                        <Button variant="contained" color="primary" fullWidth style={styleForm.submitUI}  onClick={this.telefono}>
                             Ingresar con telefono
                         </Button>
                     </div>

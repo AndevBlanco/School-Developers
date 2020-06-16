@@ -10,37 +10,42 @@ export const MenuIzquierda = ({ classes }) => (
                 <ListItemText classes={{ primary: classes.ListItemText }} primary="Inicio"></ListItemText>
             </ListItem>
         </List>
+        <Divider />
         <List>
-            <ListItem component={Link} button to="/Perfil">
+            <ListItem component={Link} button to="/editar/perfil">
                 <i className="material-icons">account_box</i>
                 <ListItemText classes={{ primary: classes.ListItemText }} primary="Perfil"></ListItemText>
             </ListItem>
         </List>
         <Divider />
         <List>
-            <ListItem component={Link} button to="/Problema" >
+            <ListItem component={Link} button to="/problema" >
                 <i className="material-icons">add_box</i>
                 <ListItemText classes={{ primary: classes.ListItemText }} primary="Subir Problema"></ListItemText>
             </ListItem>
         </List>  
+        <Divider />
         <List>
-            <ListItem component={Link} button to="/ListaProblemas" >
+            <ListItem component={Link} button to="/Inicio/ListadeProblemas" >
                 <i className="material-icons">business</i>
-                <ListItemText classes={{ primary: classes.ListItemText }} primary="Problemas"></ListItemText>
+                <ListItemText classes={{ primary: classes.ListItemText }} primary="Mis Problemas"></ListItemText>
             </ListItem>
         </List>
+        <Divider />
         <List>
-            <ListItem component={Link} button to="" >
-                <i className="material-icons">mail_outline</i>
-                <ListItemText classes={{ primary: classes.ListItemText }} primary="Mensajes"></ListItemText>
+            <ListItem component={Link} button to="/problemas/publicos" >
+                <i className="material-icons">business</i>
+                <ListItemText classes={{ primary: classes.ListItemText }} primary="Problemas Publicados"></ListItemText>
             </ListItem>
         </List>
+        <Divider />
         <List>
-            <ListItem component={Link} button to="/Tablero" >
+            <ListItem component={Link} button to="/Inicio/tablero" >
                 <i className="material-icons">aspect_ratio</i>
                 <ListItemText classes={{ primary: classes.ListItemText }} primary="Tablero"></ListItemText>
             </ListItem>
         </List>
+        <Divider />
 
     </div >
 )

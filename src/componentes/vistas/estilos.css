@@ -10,51 +10,16 @@
     margin-top: -1.4rem;
 }
 @media only screen and (max-width:1090px){
-    #esconder{
-        display: none;
-    }
-    .menu {
-        display:block ;
-        cursor: pointer;
-        padding: 0.5rem 1rem;
-    }   
-    .navigation{
-        width: 100%;
-        margin-top: 1rem;
-    }
-    .navigation ul{
-        display: none;
-    }
-    .navigation ul .show{
-        display: block;
-        margin-top: 1em;
-    }
-    .navigation ul li {
-        display: block;
-    }
-    .navigation ul li a {
-        display: block;
-        padding: 0.5rem 1rem;
-        transition: all 0.4s linear;
-        border-radius: 25px;
-    }
-    #slader{
-        height: 300px;
-        background-image: url(https://raw.githubusercontent.com/JairPrada/Construccion/master/views/public/imagenes/libros.jpg);
+
+    .banner{
+        height: 200px;
+        background-image: url(../../fondo2.jpg);
         background-repeat: no-repeat;
         background-size:100%;
         background-position:center;
         animation: cambio 10s infinite;
+        margin-top: -1.9rem;
     } 
-}
-@keyframes animacion{
-    0%{
-        transform: scale(1.1,1.1);
-    }
-    100%{
-        transform: scale(1.2,1.2);
-        
-    }
 }
 @keyframes cambio{
     0%{

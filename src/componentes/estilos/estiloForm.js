@@ -58,6 +58,11 @@ const styleForm = {
     captcha:{
         flexGrow:1,
         marginBottom:10
+    },
+    link:{
+        display: "flex",
+        textDecoration:"none",
+        color:"rgba(0, 41, 90, 0.945)"
     }
 }
 export default styleForm

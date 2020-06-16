@@ -1,6 +1,6 @@
 import React from 'react';
 import estilos from "./estilos.css"
-import { Grid, Card } from '@material-ui/core';
+import { Grid} from '@material-ui/core';
 
 export default function Inicio() {
   return (

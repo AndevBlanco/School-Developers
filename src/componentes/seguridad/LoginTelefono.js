@@ -6,6 +6,7 @@ import styleForm from '../estilos/estiloForm';
 import { consumerFirebase } from '../../server';
 import { StateContext } from "../../sesion/store";
 import { openMensajePantalla } from "../../sesion/actions/snackbarAction";
+import { Link } from 'react-router-dom';
 
 class LoginTelefono extends Component {
     static contextType = StateContext;
@@ -93,7 +94,7 @@ class LoginTelefono extends Component {
                                     sesion: doc.data(),
                                     autenticado: true
                                 });
-                                this.props.history.push("/Perfil")
+                                this.props.history.push("/editar/perfil")
                             })
                     })
                     .catch(error => {
@@ -112,6 +113,7 @@ class LoginTelefono extends Component {
     }
     render() {
         return (
+            
             <Container maxWidth="xs" >
                 <Dialog open={this.state.dialogAbierto} onClose={() => { this.setState({ dialogAbierto: false }) }}>
                     <DialogContent>
@@ -158,7 +160,13 @@ class LoginTelefono extends Component {
                             Enviar
                         </Button>
                     </form>
-
+                    <Grid container >
+                            <Grid item xs >
+                                <Link style={styleForm.link} to="/" variant="body2">
+                                    {"Ya tengo una cuenta"}
+                                </Link>
+                            </Grid>
+                        </Grid>
                 </div>
             </Container>
         );

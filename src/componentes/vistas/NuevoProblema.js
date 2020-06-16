@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Container, Paper, Grid, Breadcrumbs, Link, Typography, TextField, Autocomplete, Button, MenuItem, Table, TableBody, TableRow, TableCell } from "@material-ui/core";
+import { Container, Paper, Grid, Breadcrumbs, Link, Typography, TextField, Button, Table, TableBody, TableRow, TableCell } from "@material-ui/core";
 import HomeIcon from "@material-ui/icons/Home";
 import { consumerFirebase } from "../../server";
 import { openMensajePantalla } from "../../sesion/actions/snackbarAction";
@@ -73,17 +73,18 @@ class NuevoProblema extends Component {
             let extension = nombre.split(".").pop();
             archivos[key].alias = (nombre.split(".")[0] + "_" + valorDinamico + "." + extension).replace(/\s/g, "_").toLowerCase();
         })
-
+        
         const textoBusqueda = problema.titulo + ' ' + problema.categoria + ' ' + problema.ciudad;
         let keywords = crearKeyword(textoBusqueda);
         this.props.Firebase.guardarDocumentos(archivos).then(arregloUrls => {
             problema.fotos = arregloUrls;
             problema.keywords = keywords;
+            problema.propietario=this.props.Firebase.auth.currentUser.uid;
             this.props.Firebase.db
                 .collection("Problemas")
                 .add(problema)
                 .then(success => {
-                    this.props.history.push("/ListaProblemas")
+                    this.props.history.push("/Inicio/Listadeproblemas")
                 })
                 .catch(error => {
                     openMensajePantalla({
@@ -111,9 +112,9 @@ class NuevoProblema extends Component {
                     <Grid container spacing={3}>
                         <Grid item xs={12} md={8}>
                             <Breadcrumbs aria-label="Breadcrumbs">
-                                <Link color="inherit" style={style.link} href="/">
+                                <Link color="inherit" style={style.link} href="/Inicio">
                                     <HomeIcon style={style.homeIcon} />
-                                Home
+                                Inicio
                                 </Link>
                                 <Typography color="textPrimary">Nuevo Problema</Typography>
                             </Breadcrumbs>
@@ -145,7 +146,7 @@ class NuevoProblema extends Component {
                                     withIcon={true}
                                     buttonText="Selecione Archivos"
                                     onChange={this.subirArchivos}
-                                    imgExtension={[".jpg", ".gif", ".png", ".jpeg"]}
+                                    imgExtension={[".jpg", ".gif", ".png", ".jpeg","jfif"]}
                                     maxFileSize={5242880}
                                 />
                             </Grid>
